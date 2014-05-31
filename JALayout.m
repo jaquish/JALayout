@@ -26,7 +26,7 @@
 
 @end
 
-@implementation UIView (PXLayout)
+@implementation UIView (JALayout)
 
 #pragma Mark - Public
 
@@ -41,6 +41,20 @@
 {
     view.translatesAutoresizingMaskIntoConstraints = NO;
     [self insertSubview:view aboveSubview:siblingSubview];
+    [self stretchView:view];
+}
+
+- (void)insertSubviewAndStretchToFill:(UIView *)view atIndex:(NSInteger)index
+{
+    view.translatesAutoresizingMaskIntoConstraints = NO;
+    [self insertSubview:view atIndex:index];
+    [self stretchView:view];
+}
+
+- (void)insertSubviewAndStretchToFill:(UIView *)view belowSubview:(UIView *)siblingSubview
+{
+    view.translatesAutoresizingMaskIntoConstraints = NO;
+    [self insertSubview:view belowSubview:siblingSubview];
     [self stretchView:view];
 }
 

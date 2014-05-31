@@ -11,11 +11,14 @@
 
 @end
 
-@interface UIView (PXLayout)
+@interface UIView (JALayout)
 
 /* For Subviews */
 - (void)addSubviewAndStretchToFill:(UIView*)view;
 - (void)insertSubviewAndStretchToFill:(UIView *)view aboveSubview:(UIView *)siblingSubview;
+- (void)insertSubviewAndStretchToFill:(UIView *)view atIndex:(NSInteger)index;
+- (void)insertSubviewAndStretchToFill:(UIView *)view belowSubview:(UIView *)siblingSubview;
+
 - (void)compressSizeTo:(CGSize)size;
 
 /* For that view */
