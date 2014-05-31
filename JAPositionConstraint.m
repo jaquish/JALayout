@@ -8,7 +8,11 @@
 
 @property (nonatomic, weak, readwrite) UIView *view;
 
+@property (nonatomic) NSMutableArray *stack;
+
 @end
+
+static const float MAX_STACK = 50;
 
 @implementation JAPositionConstraint
 
@@ -24,6 +28,7 @@
         [superview addConstraint:self.constraintX];
         [superview addConstraint:self.constraintY];
         
+        self.stack = [NSMutableArray array];
         self.view = view;
     }
     
@@ -32,7 +37,7 @@
 
 - (void)setX:(CGFloat)x
 {
-    self.constraintX.constant = x;
+    [self setPosition:CGPointMake(x, self.position.y)];
 }
 
 - (CGFloat)x
@@ -42,7 +47,7 @@
 
 - (void)setY:(CGFloat)y
 {
-    self.constraintY.constant = y;
+    [self setPosition:CGPointMake(self.position.x, y)];
 }
 
 - (CGFloat)y
@@ -52,8 +57,13 @@
 
 - (void)setPosition:(CGPoint)position
 {
-    self.x = position.x;
-    self.y = position.y;
+    [self.stack addObject:NSStringFromCGPoint(self.position)];  // save
+    if ([self.stack count] > MAX_STACK) {
+        [self.stack removeObjectAtIndex:0];
+    }
+    
+    self.constraintX.constant = position.x;
+    self.constraintY.constant = position.y;
 }
 
 - (CGPoint)position
@@ -64,6 +74,16 @@
 - (NSArray*)constraints
 {
     return @[self.constraintX, self.constraintY];
+}
+
+- (void)moveToPreviousPosition
+{
+    if ([self.stack count]) {
+        CGPoint p = CGPointFromString([self.stack lastObject]);
+        [self.stack removeLastObject];
+        self.constraintX.constant = p.x;
+        self.constraintY.constant = p.y;
+    }
 }
 
 - (NSString *)description

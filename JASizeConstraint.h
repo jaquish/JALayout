@@ -12,4 +12,6 @@
 
 - (NSArray*)constraints;
 
+- (void)resizeToPreviousSize;
+
 @end

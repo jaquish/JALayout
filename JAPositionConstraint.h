@@ -12,4 +12,6 @@
 
 - (NSArray*)constraints;
 
+- (void)moveToPreviousPosition;
+
 @end

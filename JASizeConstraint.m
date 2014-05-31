@@ -9,7 +9,11 @@
 
 @property (nonatomic, weak, readwrite) UIView *view;
 
+@property (nonatomic) NSMutableArray *stack;
+
 @end
+
+static const float MAX_STACK = 50;
 
 @implementation JASizeConstraint
 
@@ -25,6 +29,7 @@
         [self.view addConstraint:self.constraintHeight];
         [self.view addConstraint:self.constraintWidth];
         
+        self.stack = [NSMutableArray array];
         self.size = size;
     }
     
@@ -33,7 +38,7 @@
 
 - (void)setWidth:(CGFloat)width
 {
-    self.constraintWidth.constant = width;
+    [self setSize:CGSizeMake(width, self.height)];
 }
 
 - (CGFloat)width
@@ -43,7 +48,7 @@
 
 - (void)setHeight:(CGFloat)height
 {
-    self.constraintHeight.constant = height;
+    [self setSize:CGSizeMake(self.width, height)];
 }
 
 - (CGFloat)height
@@ -53,8 +58,13 @@
 
 - (void)setSize:(CGSize)size
 {
-    self.width = size.width;
-    self.height = size.height;
+    [self.stack addObject:NSStringFromCGSize(self.size)];  // save
+    if ([self.stack count] > MAX_STACK) {
+        [self.stack removeObjectAtIndex:0];
+    }
+    
+    self.constraintWidth.constant = size.width;
+    self.constraintHeight.constant = size.height;
 }
 
 - (CGSize)size
@@ -65,6 +75,16 @@
 - (NSArray *)constraints
 {
     return @[self.constraintWidth, self.constraintHeight];
+}
+
+- (void)resizeToPreviousSize
+{
+    if ([self.stack count]) {
+        CGSize s = CGSizeFromString([self.stack lastObject]);
+        [self.stack removeLastObject];
+        self.constraintWidth.constant = s.width;
+        self.constraintHeight.constant = s.height;
+    }
 }
 
 - (NSString *)description
