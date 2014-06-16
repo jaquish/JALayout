@@ -1,7 +1,7 @@
 
-#import "JAPositionConstraint.h"
+#import "JACenterPositionConstraint.h"
 
-@interface JAPositionConstraint ()
+@interface JACenterPositionConstraint ()
 
 @property (nonatomic) NSLayoutConstraint *constraintX;
 @property (nonatomic) NSLayoutConstraint *constraintY;
@@ -14,7 +14,7 @@
 
 static const float MAX_STACK = 50;
 
-@implementation JAPositionConstraint
+@implementation JACenterPositionConstraint
 
 - (instancetype)initWithView:(UIView*)view inSuperview:(UIView*)superview atPoint:(CGPoint)point
 {
@@ -24,9 +24,6 @@ static const float MAX_STACK = 50;
         
         self.constraintX = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:point.x];
         self.constraintY = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeTop multiplier:1.0 constant:point.y];
-        
-        [superview addConstraint:self.constraintX];
-        [superview addConstraint:self.constraintY];
         
         self.stack = [NSMutableArray array];
         self.view = view;

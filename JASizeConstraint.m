@@ -26,9 +26,6 @@ static const float MAX_STACK = 50;
         self.constraintWidth  = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth  relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:size.width];
         self.constraintHeight = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:size.height];
         
-        [self.view addConstraint:self.constraintHeight];
-        [self.view addConstraint:self.constraintWidth];
-        
         self.stack = [NSMutableArray array];
         self.size = size;
     }

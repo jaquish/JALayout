@@ -1,12 +1,12 @@
 
 #import <Foundation/Foundation.h>
-#import "JAPositionConstraint.h"
+#import "JACenterPositionConstraint.h"
 #import "JASizeConstraint.h"
 
 @interface JALayout : NSObject
 
 + (void)stretchView:(UIView*)view toFillView:(UIView*)superview;
-+ (JAPositionConstraint*)positionView:(UIView*)view inView:(UIView*)superview atPoint:(CGPoint)point;
++ (JACenterPositionConstraint*)positionView:(UIView*)view inView:(UIView*)superview atPoint:(CGPoint)point;
 + (JASizeConstraint*)sizeView:(UIView*)view toSize:(CGSize)size;
 
 @end

@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JAPositionConstraint : NSObject
+@interface JACenterPositionConstraint : NSObject
 
 - (instancetype)initWithView:(UIView*)view inSuperview:(UIView*)superview atPoint:(CGPoint)point;
 

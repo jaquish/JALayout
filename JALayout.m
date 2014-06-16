@@ -11,16 +11,17 @@
     [superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view":view}]];
 }
 
-+ (JAPositionConstraint*)positionView:(UIView*)view inView:(UIView*)superview atPoint:(CGPoint)point
++ (JACenterPositionConstraint*)positionView:(UIView*)view inView:(UIView*)superview atPoint:(CGPoint)point
 {
-    JAPositionConstraint *positionConstraint = [[JAPositionConstraint alloc] initWithView:view inSuperview:superview atPoint:point];
+    JACenterPositionConstraint *positionConstraint = [[JACenterPositionConstraint alloc] initWithView:view inSuperview:superview atPoint:point];
+    [superview addConstraints:positionConstraint.constraints];
     return positionConstraint;
 }
 
 + (JASizeConstraint*)sizeView:(UIView*)view toSize:(CGSize)size
 {
     JASizeConstraint *sizeConstraint = [[JASizeConstraint alloc] initWithView:view size:size];
-    [view.superview setNeedsLayout];
+    [view addConstraints:sizeConstraint.constraints];
     return sizeConstraint;
 }
 
