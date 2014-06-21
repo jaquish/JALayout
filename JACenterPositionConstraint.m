@@ -12,6 +12,7 @@
 
 @end
 
+// Maximum number of previous positions that will be remembered
 static const float MAX_STACK = 50;
 
 @implementation JACenterPositionConstraint

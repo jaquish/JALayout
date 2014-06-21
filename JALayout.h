@@ -13,17 +13,16 @@
 
 @interface UIView (JALayout)
 
-/* For Subviews */
+/* From perspective of superview */
 - (void)addSubviewAndStretchToFill:(UIView*)view;
 - (void)insertSubviewAndStretchToFill:(UIView *)view aboveSubview:(UIView *)siblingSubview;
 - (void)insertSubviewAndStretchToFill:(UIView *)view atIndex:(NSInteger)index;
 - (void)insertSubviewAndStretchToFill:(UIView *)view belowSubview:(UIView *)siblingSubview;
 
-- (void)compressSizeTo:(CGSize)size;
-
-/* For that view */
+/* From perspective of subview */
 - (void)centerHorizontallyInSuperview;
 - (void)centerVerticallyInSuperview;
 - (void)centerInSuperview;
+- (void)compressSizeTo:(CGSize)size;
 
 @end
