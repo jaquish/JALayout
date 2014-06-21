@@ -13,6 +13,7 @@
 
 @end
 
+// Maximum number of previous sizes that will be remembered
 static const float MAX_STACK = 50;
 
 @implementation JASizeConstraint

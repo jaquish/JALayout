@@ -66,12 +66,14 @@
 
 - (void)centerHorizontallyInSuperview
 {
+    NSAssert(self.superview, @"View expected to already have a superview");
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
     [self.superview addConstraint:constraint];
 }
 
 - (void)centerVerticallyInSuperview
 {
+    NSAssert(self.superview, @"View expected to already have a superview");
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
     [self.superview addConstraint:constraint];
 }
